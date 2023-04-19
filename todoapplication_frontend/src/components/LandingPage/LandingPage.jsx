@@ -11,7 +11,7 @@ function LandingPage() {
       </div>
 
       <div className="title">
-        <h1>ToDo Application</h1>
+        <h1>ToDo Anwendung</h1>
       </div>
 
       <Link className="start" to={"/home"}>

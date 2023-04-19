@@ -97,17 +97,17 @@ function TodoApp() {
       transition={{ duration: 3 }}
     >
     <div>
-      <h1 className="title_todo">Todo Application</h1>
+      <h1 className="title_todo">Todo Anwendung</h1>
       <div className="input_btn">
         <input
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
         />
-        <button onClick={handleAddTodo}>Add</button>
+        <button onClick={handleAddTodo}>Einfügen</button>
       </div>
-      <p className="lefttodos">{remainingTodos} Tasks left</p>
-      <button className="voice_todo" onClick={handleReadTodos}>Read Todos</button>
+      <p className="lefttodos">{remainingTodos} Aufgaben übrig</p>
+      <button className="voice_todo" onClick={handleReadTodos}>Aufgaben vorlesen</button>
       <div className="todos">
         {todos.map((todo) => (
           <div className="todo_input" key={todo.id}>
@@ -122,7 +122,7 @@ function TodoApp() {
             </span>
             <button
             className="btn_delete"
-              onClick={() => handleDeleteTodo(todo.id, alert("Congratulations on completing the task!") )}
+              onClick={() => handleDeleteTodo(todo.id, alert("Toll, du hast die Aufgabe erfüllt!") )}
               disabled={!checkedTodos.includes(todo.id)}
             >
               <ImBin/>
@@ -132,7 +132,7 @@ function TodoApp() {
               onClick={() =>
                 handleEditTodo(
                   todo.id,
-                  prompt("Edit Task:", todo.task),
+                  prompt("Aufgabe bearbeiten:", todo.task),
                   todo.completed
                 )
               }
