@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: IM Fell English SC;
+    background-color: rgba(0,32,67,255);
+    color: white;
+}
