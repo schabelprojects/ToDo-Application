@@ -5,8 +5,8 @@
 
 .pucLogo{
     display: flex;
-    height: 20rem;
-    width: 20rem;
+    height: 15rem;
+    width: 15rem;
     margin: auto;
     animation-delay: 4s;
     animation: fadeInRight 2s ease-in-out;
@@ -47,7 +47,7 @@
     font-size: 25px;
     color: white;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 30px;
     opacity: 0;
     animation: forwards 1s appear;
     animation-delay: 5s;

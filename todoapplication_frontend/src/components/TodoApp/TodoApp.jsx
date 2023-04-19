@@ -2,16 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./TodoApp.css";
 import {ImBin} from "react-icons/im"
 import {FaEdit} from "react-icons/fa"
+import { motion } from "framer-motion";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [checkedTodos, setCheckedTodos] = useState([]);
 
+  const { speechSynthesis } = window;
+
+  const handleReadTodos = () => {
+    const germanVoice = new SpeechSynthesisUtterance();
+    germanVoice.lang = 'de-DE';
+    germanVoice.text = `Sie haben ${todos.length} Aufgaben übrig. ${todos.map(todo => todo.task).join(", dann ")}`;
+    window.speechSynthesis.speak(germanVoice);
+  };
+
+
   useEffect(() => {
     fetch("http://localhost:8080/todos")
       .then((response) => response.json())
-      .then((data) => setTodos(data));
+      .then((data) => {
+        setTodos(data);
+      });
   }, []);
 
   const handleAddTodo = () => {
@@ -62,6 +75,7 @@ function TodoApp() {
 
   const handleToggleCompleted = (id, completed) => {
     handleEditTodo(id, todos.find((todo) => todo.id === id).task, !completed);
+    readTodos();
   };
 
   const handleCheckboxChange = (id) => {
@@ -75,8 +89,15 @@ function TodoApp() {
   const remainingTodos = todos.filter((todo) => !todo.completed).length;
 
   return (
+    <motion.div
+      className="container text-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 3 }}
+    >
     <div>
-      <h1 className="title_todo">Todo App</h1>
+      <h1 className="title_todo">Todo Application</h1>
       <div className="input_btn">
         <input
           type="text"
@@ -85,9 +106,9 @@ function TodoApp() {
         />
         <button onClick={handleAddTodo}>Add</button>
       </div>
-      <p className="lefttodos">{remainingTodos} Todos left</p>
+      <p className="lefttodos">{remainingTodos} Tasks left</p>
+      <button className="voice_todo" onClick={handleReadTodos}>Read Todos</button>
       <div className="todos">
-
         {todos.map((todo) => (
           <div className="todo_input" key={todo.id}>
             <input
@@ -101,7 +122,7 @@ function TodoApp() {
             </span>
             <button
             className="btn_delete"
-              onClick={() => handleDeleteTodo(todo.id)}
+              onClick={() => handleDeleteTodo(todo.id, alert("Congratulations on completing the task!") )}
               disabled={!checkedTodos.includes(todo.id)}
             >
               <ImBin/>
@@ -120,9 +141,9 @@ function TodoApp() {
             </button>
           </div>
         ))}
-
       </div>
     </div>
+    </motion.div>
   );
 }
 
