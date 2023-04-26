@@ -15,7 +15,7 @@ function HomePage() {
       <div className="nav-link-container">
         <div className="nav-link">
           <Link className="link-home" to={"/todoapp"}>
-            Neue Aufgaben anlegen
+            Set new Todos
           </Link>
         </div>
       </div>

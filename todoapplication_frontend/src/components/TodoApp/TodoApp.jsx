@@ -12,10 +12,9 @@ function TodoApp() {
   const { speechSynthesis } = window;
 
   const handleReadTodos = () => {
-    const germanVoice = new SpeechSynthesisUtterance();
-    germanVoice.lang = 'de-DE';
-    germanVoice.text = `Sie haben ${todos.length} Aufgaben übrig. ${todos.map(todo => todo.task).join(", dann ")}`;
-    window.speechSynthesis.speak(germanVoice);
+    const englishVoice = new SpeechSynthesisUtterance();
+    englishVoice.text = `You have ${todos.length} remaining Toodoos left. ${todos.map(todo => todo.task).join(", then ")}`;
+    window.speechSynthesis.speak(englishVoice);
   };
 
 
@@ -97,17 +96,17 @@ function TodoApp() {
       transition={{ duration: 3 }}
     >
     <div>
-      <h1 className="title_todo">Todo Anwendung</h1>
+      <h1 className="title_todo">Todo App</h1>
       <div className="input_btn">
         <input
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
         />
-        <button onClick={handleAddTodo}>Einfügen</button>
+        <button onClick={handleAddTodo}>Add</button>
       </div>
-      <p className="lefttodos">{remainingTodos} Aufgaben übrig</p>
-      <button className="voice_todo" onClick={handleReadTodos}>Aufgaben vorlesen</button>
+      <p className="lefttodos">{remainingTodos} Remaining Todos</p>
+      <button className="voice_todo" onClick={handleReadTodos}>Read Todos</button>
       <div className="todos">
         {todos.map((todo) => (
           <div className="todo_input" key={todo.id}>
@@ -122,7 +121,7 @@ function TodoApp() {
             </span>
             <button
             className="btn_delete"
-              onClick={() => handleDeleteTodo(todo.id, alert("Toll, du hast die Aufgabe erfüllt!") )}
+              onClick={() => handleDeleteTodo(todo.id, alert("Great, you have completed this todo!") )}
               disabled={!checkedTodos.includes(todo.id)}
             >
               <ImBin/>
